@@ -43,8 +43,13 @@ namespace BusinessLayer
 
         public List<String> ListHousesSup200Unit()
         {
+            List<House> houses = dal.GetAllHouses();
             List<String> res = new List<String>();
-            dal.GetAllHousesSup200Unit().ForEach(h => res.Add(h.ToString()));
+
+            foreach (House h in houses)
+            {
+                if (h.NumberOfUnities < 200) res.Add(h.ToString());
+            }
 
             return res;
 

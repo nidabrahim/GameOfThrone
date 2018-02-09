@@ -39,9 +39,14 @@ namespace DataAccessLayer
 
 
         TerritoryType GetTerritoryTypeById(int id);
+        CharacterType GetCharacterTypeById(int id);
+        RelationType GetRelationTypeById(int id);
 
 
         List<War> GetAllWars();
+        War GetWarById(int id);
+
+        int GetLastId(String table);
 
     }
 }

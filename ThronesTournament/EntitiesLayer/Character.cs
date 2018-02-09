@@ -17,6 +17,7 @@ namespace EntitiesLayer
         private int _pv;
         private CharacterType _type;
         private List<Relation> _relations;
+        private House _house;
 
 
         public String FirstName
@@ -61,6 +62,12 @@ namespace EntitiesLayer
             set { _relations = value; }
         }
 
+        public House House
+        {
+            get { return _house; }
+            set { _house = value; }
+        }
+
 
         public Character()
         {
@@ -70,6 +77,7 @@ namespace EntitiesLayer
             Bravoury = 0;
             Crazyness = 0;
             Pv = GlobalVar.PV;
+            House = new House();
             Relations = new List<Relation>();
           
         }
@@ -82,6 +90,19 @@ namespace EntitiesLayer
             Bravoury = 0;
             Crazyness = 0;
             Pv = GlobalVar.PV;
+            House = new House();
+            Relations = new List<Relation>();
+        }
+
+        public Character(String FirstName, String LastName, CharacterType characterType , House house)
+        {
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+            Type = characterType;
+            Bravoury = 0;
+            Crazyness = 0;
+            Pv = GlobalVar.PV;
+            House = house;
             Relations = new List<Relation>();
         }
 
@@ -93,6 +114,7 @@ namespace EntitiesLayer
             this.Bravoury = 0;
             this.Crazyness = 0;
             this.Pv = GlobalVar.PV;
+            House = new House();
             Relations = new List<Relation>();
         }
 
@@ -105,6 +127,7 @@ namespace EntitiesLayer
             this.Bravoury = Bravoury;
             this.Crazyness = Crazyness;
             this.Pv = GlobalVar.PV;
+            House = new House();
             Relations = new List<Relation>();
         }
 

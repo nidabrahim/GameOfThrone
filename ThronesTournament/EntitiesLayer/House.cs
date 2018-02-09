@@ -35,9 +35,6 @@ namespace EntitiesLayer
 
         public House()
         {
-            Name = "Guest";
-            NumberOfUnities = GlobalVar.NUMBEROfUNITIES;
-            Housers = new List<Character>();
         }
 
         public House(String Name)

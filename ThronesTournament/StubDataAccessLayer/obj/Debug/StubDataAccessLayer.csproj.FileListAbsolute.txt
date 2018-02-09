@@ -13,3 +13,11 @@ C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\ThronesTournamentConsole\St
 C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\ThronesTournamentConsole\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.csproj.CoreCompileInputs.cache
 C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\ThronesTournamentConsole\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.dll
 C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\ThronesTournamentConsole\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.pdb
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.dll
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.pdb
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\StubDataAccessLayer\bin\Debug\StubDataAccessLayer.dll
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\StubDataAccessLayer\bin\Debug\StubDataAccessLayer.pdb
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\StubDataAccessLayer\bin\Debug\EntitiesLayer.dll
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\StubDataAccessLayer\bin\Debug\EntitiesLayer.pdb

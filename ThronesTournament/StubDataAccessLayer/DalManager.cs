@@ -36,7 +36,7 @@ namespace StubDataAccessLayer
             List<House> houses = GetAllHouses();
             foreach(House h in houses)
             {
-                if (h.GetNumberOfUnities() < 200) houses.Remove(h);
+                if (h.NumberOfUnities < 200) houses.Remove(h);
             }
             return houses;
         }
@@ -44,7 +44,7 @@ namespace StubDataAccessLayer
         public List<Territory> GetAllTerritory()
         {
             List<Territory> territories = new List<Territory>();
-            territories.Add(new Territory(TerritoryTypeEnum.DESERT));
+            territories.Add(new Territory());
 
             return territories;
         }

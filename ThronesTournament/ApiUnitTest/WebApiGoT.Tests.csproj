@@ -48,13 +48,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="apiUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EntitiesLayer\EntitiesLayer.csproj">
+      <Project>{65d09239-55cc-4735-9b16-4dc33e78ca58}</Project>
+      <Name>EntitiesLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebApiGoT\WebApiGoT.csproj">
       <Project>{f61fb4db-8f3a-4a4a-a6a0-3822c93a33ed}</Project>
       <Name>WebApiGoT</Name>

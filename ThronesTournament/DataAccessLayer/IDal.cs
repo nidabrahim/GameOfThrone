@@ -10,7 +10,6 @@ namespace DataAccessLayer
     public interface IDal
     {
         List<House> GetAllHouses();
-        List<House> GetAllHousesSup200Unit();
         House GetHouseById(int id);
         void SaveHouse(House house);
         void UpdateHouse(House house);
@@ -26,6 +25,7 @@ namespace DataAccessLayer
 
         List<Fight> GetAllFights();
         Fight GetFightById(int id);
+        List<Fight> GetFightsByIdHouse(int id);
         void SaveFight(Fight fight);
         void UpdateFight(Fight fight);
         void DeleteFight(Fight fight);

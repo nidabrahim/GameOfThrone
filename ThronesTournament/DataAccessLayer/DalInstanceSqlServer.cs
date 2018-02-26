@@ -11,7 +11,7 @@ namespace DataAccessLayer
     public class DalInstanceSqlServer : IDal
     {
 
-        private static string connexionString = "Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename='C:\\Users\\youssefNIDA\\Documents\\ISIMA\\S2\\web Services\\DB\\db_thrones.mdf';Integrated Security = True; Connect Timeout = 30";
+        private static string connexionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename='C:\\Users\\youssefNIDA\\Documents\\ISIMA\\S2\\web Services\\Projet\\BD\\db_thrones.mdf';Integrated Security=True;Connect Timeout=30";
 
 
         public DalInstanceSqlServer() { }
@@ -22,7 +22,7 @@ namespace DataAccessLayer
         {
             List<House> houses = new List<House>();
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = /*(Connexion.Instance).SqlConnection*/new SqlConnection(connexionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * FROM House", sqlConnection);
@@ -89,16 +89,6 @@ namespace DataAccessLayer
             }
 
                 return houses;
-        }
-
-        public List<House> GetAllHousesSup200Unit()
-        {
-            List<House> houses = GetAllHouses();
-            foreach (House h in houses)
-            {
-                if (h.NumberOfUnities < 200) houses.Remove(h);
-            }
-            return houses;
         }
 
         public House GetHouseById(int id)
@@ -325,7 +315,7 @@ namespace DataAccessLayer
 
             return character;
         }
-        /**/
+        
         public void SaveCharacter(Character character)
         {
             String insertCharacterRequest = "INSERT INTO Character(firstName,lastName,bravoury,crazyness,pv,characterType_id,house_id) VALUES (@FirstName,@LastName,@Bravoury,@Crazyness,@Pv,@CharacterType_id,@House_id)";
@@ -481,6 +471,37 @@ namespace DataAccessLayer
             }
 
             return fight;
+        }
+
+        public List<Fight> GetFightsByIdHouse(int id)
+        {
+            List<Fight> fights = new List<Fight>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("select winningHouse_id from Fight where houseChalleging_id = " + id +"or houseChalleged_id = "+ id , sqlConnection);
+                using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                {
+                    while (sqlDataReader.Read())
+                    {
+                        Fight fight = new Fight();
+                        fight.idEntityObject = Int32.Parse(sqlDataReader["idFight"].ToString());
+                        fight.HouseChalleged = GetHouseById(Int32.Parse(sqlDataReader["houseChalleged_id"].ToString()));
+                        fight.HouseChalleging = GetHouseById(Int32.Parse(sqlDataReader["houseChalleging_id"].ToString()));
+                        fight.WinningHouse = GetHouseById(Int32.Parse(sqlDataReader["winningHouse_id"].ToString()));
+                        fight.Territory = GetTerritoryById(Int32.Parse(sqlDataReader["territory_id"].ToString()));
+                        fight.War = GetWarById(Int32.Parse(sqlDataReader["war_id"].ToString()));
+
+                        fights.Add(fight);
+                    }
+
+                    
+                }
+                sqlConnection.Close();
+            }
+
+            return fights;
         }
 
         public void SaveFight(Fight fight)
@@ -820,5 +841,7 @@ namespace DataAccessLayer
             }
             return index;
         }
+
+    
     }
 }

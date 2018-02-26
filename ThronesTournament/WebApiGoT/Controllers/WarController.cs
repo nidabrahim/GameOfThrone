@@ -9,11 +9,12 @@ using WebApiGoT.Models;
 
 namespace WebApiGoT.Controllers
 {
+    [RoutePrefix("api/war")]
     public class WarController : ApiController
     {
         ThronesTournamentManager businessManager = new ThronesTournamentManager();
 
-
+        [Route("GetAllWars")]
         public List<WarDTO> GetAllWars()
         {
             List<WarDTO> listWar= new List<WarDTO>();

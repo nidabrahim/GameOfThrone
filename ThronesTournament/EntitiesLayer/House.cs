@@ -56,6 +56,18 @@ namespace EntitiesLayer
             Housers.Add(character);
         }
 
+        public Boolean isHouseContain(CharacterType characterType)
+        {
+            Boolean contain = false;
+
+            foreach (Character character in this.Housers)
+            {
+                if (character.Type == characterType) contain = true;
+            }
+
+            return contain;
+        }
+
         override
         public String ToString()
         {

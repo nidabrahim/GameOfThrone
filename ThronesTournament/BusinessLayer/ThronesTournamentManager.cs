@@ -104,27 +104,56 @@ namespace BusinessLayer
             dal.SaveCharacter(character);
         }
 
-        public House Combat(House house1, House house2)
+        public void AddFight(House HouseChalleging, House HouseChalleged, House WinningHouse, Territory territory)
+        {
+            Fight fight = new Fight();
+            fight.HouseChalleging = HouseChalleging;
+            fight.HouseChalleged = HouseChalleged;
+            fight.WinningHouse = WinningHouse;
+            fight.Territory = territory;
+            fight.War = GetLastWar();
+
+            dal.SaveFight(fight);
+        }
+
+        public void AddTerritory(int idTerritoryType, int idOwner)
+        {
+            Territory territory = new Territory();
+            territory.TerritoryType = dal.GetTerritoryTypeById(idTerritoryType);
+            territory.Owner = dal.GetCharacterById(idOwner);
+
+            dal.SaveTerritory(territory);
+        }
+
+        public House Combat(int idHouseChalleging, int idHouseChalleged, int idTerritory)
         {
             double scoreH1, scoreH2;
+            House houseChalleging = dal.GetHouseById(idHouseChalleging);
+            House houseChalleged = dal.GetHouseById(idHouseChalleged);
+            Territory territory = dal.GetTerritoryById(idTerritory);
+
             //Unité
-            scoreH1 = house1.NumberOfUnities;
-            scoreH2 = house2.NumberOfUnities;
+            scoreH1 = houseChalleging.NumberOfUnities;
+            scoreH2 = houseChalleged.NumberOfUnities;
 
             //House 1
-            scoreH1 *= GetHouseMoral(house1.idEntityObject);
+            scoreH1 *= GetHouseMoral(houseChalleging.idEntityObject);
             //House 2
-            scoreH2 *= GetHouseMoral(house2.idEntityObject);
+            scoreH2 *= GetHouseMoral(houseChalleged.idEntityObject);
 
-            if (house1.isHouseContain(new CharacterType(CharaterTypeEnum.WARRIOR))){
+            if (houseChalleging.isHouseContain(new CharacterType(CharaterTypeEnum.WARRIOR))){
                 scoreH1 += 10;
             }
 
-            if (house2.isHouseContain(new CharacterType(CharaterTypeEnum.WARRIOR))){
+            if (houseChalleged.isHouseContain(new CharacterType(CharaterTypeEnum.WARRIOR))){
                 scoreH2 += 10;
             }
 
-            return (scoreH1<scoreH2)?house1:house2;
+            House winning = (scoreH1 > scoreH2) ? houseChalleging : houseChalleged;
+
+            AddFight(houseChalleging, houseChalleged, winning, territory);
+
+            return winning;
         }
 
         private Double GetHouseMoral(int idHouse)
@@ -140,6 +169,11 @@ namespace BusinessLayer
             return moral;
         }
 
+        public War GetLastWar()
+        {
+            int idLastWar = dal.GetLastId("War");
+            return dal.GetWarById(idLastWar);
+        }
        
 
     }

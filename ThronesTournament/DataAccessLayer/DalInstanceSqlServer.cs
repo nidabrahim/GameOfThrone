@@ -374,6 +374,7 @@ namespace DataAccessLayer
                 updateCharacterCommand.Parameters.AddWithValue("@Crazyness", character.Crazyness);
                 updateCharacterCommand.Parameters.AddWithValue("@Pv", character.Pv);
                 updateCharacterCommand.Parameters.AddWithValue("@CharacterType_id", character.Type.IdCharacterType);
+                updateCharacterCommand.Parameters.AddWithValue("@IdCharacter", character.idEntityObject);
                 updateCharacterCommand.ExecuteNonQuery();
 
                 foreach (Relation relation in character.Relations)
@@ -657,6 +658,32 @@ namespace DataAccessLayer
 
 
 
+        public List<TerritoryType> GetAllTerritoryTypes()
+        {
+            List<TerritoryType> territoryTypes = new List<TerritoryType>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM TerritoryType", sqlConnection);
+                using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                {
+                    while (sqlDataReader.Read())
+                    {
+                        TerritoryType territorytype = new TerritoryType();
+
+                        territorytype.IdTerritoryType = Int32.Parse(sqlDataReader["IdTerritoryType"].ToString());
+                        territorytype.Name = sqlDataReader["name"].ToString();
+
+                        territoryTypes.Add(territorytype);
+                    }
+                }
+                sqlConnection.Close();
+            }
+
+            return territoryTypes;
+        }
+
         public TerritoryType GetTerritoryTypeById(int id)
         {
             TerritoryType territoryType = new TerritoryType();
@@ -677,6 +704,50 @@ namespace DataAccessLayer
             }
 
             return territoryType;
+        }
+
+        public void SaveTerritoryType(TerritoryType territoryType)
+        {
+            String insertTerritoryTypeRequest = "INSERT INTO TerritoryType(name) VALUES (@Name)";
+
+            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            {
+                sqlConnection.Open();
+
+                SqlCommand insertCommand = new SqlCommand(insertTerritoryTypeRequest, sqlConnection);
+                insertCommand.Parameters.AddWithValue("@Name", territoryType.Name);
+                insertCommand.ExecuteNonQuery();
+
+                sqlConnection.Close();
+            }
+        }
+
+
+
+        public List<CharacterType> GetAllCharacterTypes()
+        {
+            List<CharacterType> characterTypes = new List<CharacterType>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM CharacterType", sqlConnection);
+                using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                {
+                    while (sqlDataReader.Read())
+                    {
+                        CharacterType characterType = new CharacterType();
+
+                        characterType.IdCharacterType = Int32.Parse(sqlDataReader["IdCharacterType"].ToString());
+                        characterType.Name = sqlDataReader["name"].ToString();
+
+                        characterTypes.Add(characterType);
+                    }
+                }
+                sqlConnection.Close();
+            }
+
+            return characterTypes;
         }
 
         public CharacterType GetCharacterTypeById(int id)
@@ -701,6 +772,51 @@ namespace DataAccessLayer
             return characterType;
         }
 
+        public void SaveCharacterType(CharacterType characterType)
+        {
+            String insertCharacterTypeTypeRequest = "INSERT INTO CharacterType(name) VALUES (@Name)";
+
+            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            {
+                sqlConnection.Open();
+
+                SqlCommand insertCommand = new SqlCommand(insertCharacterTypeTypeRequest, sqlConnection);
+                insertCommand.Parameters.AddWithValue("@Name", characterType.Name);
+                insertCommand.ExecuteNonQuery();
+
+                sqlConnection.Close();
+            }
+        }
+
+
+
+
+        public List<RelationType> GetAllRelationTypes()
+        {
+            List<RelationType> relationTypes = new List<RelationType>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM RelationType", sqlConnection);
+                using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                {
+                    while (sqlDataReader.Read())
+                    {
+                        RelationType relationType = new RelationType();
+
+                        relationType.IdRelationType = Int32.Parse(sqlDataReader["IdRelationType"].ToString());
+                        relationType.Name = sqlDataReader["name"].ToString();
+
+                        relationTypes.Add(relationType);
+                    }
+                }
+                sqlConnection.Close();
+            }
+
+            return relationTypes;
+        }
+
         public RelationType GetRelationTypeById(int id)
         {
             RelationType relationType = new RelationType();
@@ -722,6 +838,23 @@ namespace DataAccessLayer
 
             return relationType;
         }
+
+        public void SaveRelationType(RelationType relationType)
+        {
+            String insertRelationTypeTypeTypeRequest = "INSERT INTO RelationType(name) VALUES (@Name)";
+
+            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            {
+                sqlConnection.Open();
+
+                SqlCommand insertCommand = new SqlCommand(insertRelationTypeTypeTypeRequest, sqlConnection);
+                insertCommand.Parameters.AddWithValue("@Name", relationType.Name);
+                insertCommand.ExecuteNonQuery();
+
+                sqlConnection.Close();
+            }
+        }
+
 
 
 
@@ -842,6 +975,7 @@ namespace DataAccessLayer
             return index;
         }
 
-    
+
+
     }
 }

@@ -17,12 +17,29 @@ namespace BusinessLayer
             dal = DalManager.Instance.Dal;
         }
 
+
+
         public List<House> ListHouses()
         {
             List<House> res = new List<House>();
             dal.GetAllHouses().ForEach(h => res.Add(h) );
 
             return res;
+        }
+
+        public void AddHouse(string name, int numberOfUnities)
+        {
+
+            House house = new House();
+            house.Name = name;
+            house.NumberOfUnities = numberOfUnities;
+
+            dal.SaveHouse(house);
+        }
+
+        public House GetHouse(int idHouse)
+        {
+            return dal.GetHouseById(idHouse);
         }
 
         public List<House> GetAllHousesSup200Unit()
@@ -33,22 +50,6 @@ namespace BusinessLayer
                 if (h.NumberOfUnities < 200) houses.Remove(h);
             }
             return houses;
-        }
-
-        public List<War> ListWars()
-        {
-            List<War> res = new List<War>();
-            dal.GetAllWars().ForEach(h => res.Add(h));
-
-            return res;
-        }
-
-        public List<Fight> ListFights()
-        {
-            List<Fight> res = new List<Fight>();
-            dal.GetAllFights().ForEach(h => res.Add(h));
-
-            return res;
         }
 
         public List<String> ListHousesSup200Unit()
@@ -65,43 +66,54 @@ namespace BusinessLayer
 
         }
 
-        public List<Character> ListCharacters()
+        public void UpdateHouse(int idHouse, string name, int numberOfUnities)
         {
-            List<Character> res = new List<Character>();
-            dal.GetAllCharacters().ForEach(c => res.Add(c));
-
-            return res;
-        }
-
-        public List<Territory> ListTerritories()
-        {
-            List<Territory> res = new List<Territory>();
-            dal.GetAllTerritories().ForEach(t => res.Add(t));
-
-            return res;
-        }
-
-        public void AddHouse(string name, int numberOfUnities) {
-
-            House house = new House();
+            House house = dal.GetHouseById(idHouse);
             house.Name = name;
             house.NumberOfUnities = numberOfUnities;
 
-            dal.SaveHouse(house);
+            dal.UpdateHouse(house);
         }
 
-        public void AddCharacter(string FirstName, string LastName, int Bravoury,int Crazyness, int Pv, int IdType)
+        public void DeleteHouse(int idHouse)
         {
+            dal.DeleteHouse(dal.GetHouseById(idHouse));
+        }
 
-            Character character = new Character();
-            character.FirstName = FirstName;
-            character.LastName = LastName;
-            character.Bravoury = Bravoury;
-            character.Crazyness = Crazyness;
-            character.Pv = Pv;
-            character.Type = dal.GetCharacterTypeById(IdType);
-            
-            dal.SaveCharacter(character);
+
+
+        public List<War> ListWars()
+        {
+            List<War> res = new List<War>();
+            dal.GetAllWars().ForEach(h => res.Add(h));
+
+            return res;
+        }
+
+        public War GetWar(int idWar)
+        {
+            return dal.GetWarById(idWar);
+        }
+
+        public War GetLastWar()
+        {
+            int idLastWar = dal.GetLastId("War");
+            return dal.GetWarById(idLastWar);
+        }
+        
+
+
+        public List<Fight> ListFights()
+        {
+            List<Fight> res = new List<Fight>();
+            dal.GetAllFights().ForEach(h => res.Add(h));
+
+            return res;
+        }
+
+        public Fight GetFight(int idFight)
+        {
+            return dal.GetFightById(idFight);
         }
 
         public void AddFight(House HouseChalleging, House HouseChalleged, House WinningHouse, Territory territory)
@@ -116,6 +128,73 @@ namespace BusinessLayer
             dal.SaveFight(fight);
         }
 
+        public void DeleteFight(int idFight)
+        {
+            dal.DeleteFight(dal.GetFightById(idFight));
+        }
+
+
+
+        public List<Character> ListCharacters()
+        {
+            List<Character> res = new List<Character>();
+            dal.GetAllCharacters().ForEach(c => res.Add(c));
+
+            return res;
+        }
+
+        public Character GetCharacter(int idCharacter)
+        {
+            return dal.GetCharacterById(idCharacter);
+        }
+
+        public void AddCharacter(string FirstName, string LastName, int Bravoury, int Crazyness, int Pv, int IdType)
+        {
+
+            Character character = new Character();
+            character.FirstName = FirstName;
+            character.LastName = LastName;
+            character.Bravoury = Bravoury;
+            character.Crazyness = Crazyness;
+            character.Pv = Pv;
+            character.Type = dal.GetCharacterTypeById(IdType);
+
+            dal.SaveCharacter(character);
+        }
+
+        public void UpdateCharacter(int idCharacter, string FirstName, string LastName, int Bravoury, int Crazyness, int Pv, int IdType)
+        {
+            Character character = dal.GetCharacterById(idCharacter);
+            character.FirstName = FirstName;
+            character.LastName = LastName;
+            character.Bravoury = Bravoury;
+            character.Crazyness = Crazyness;
+            character.Pv = Pv;
+            character.Type = dal.GetCharacterTypeById(IdType);
+
+            dal.UpdateCharacter(character);
+        }
+
+        public void DeleteCharacter(int idCharacter)
+        {
+            dal.DeleteCharacter(dal.GetCharacterById(idCharacter));
+        }
+
+
+
+        public List<Territory> ListTerritories()
+        {
+            List<Territory> res = new List<Territory>();
+            dal.GetAllTerritories().ForEach(t => res.Add(t));
+
+            return res;
+        }
+
+        public Territory GetTerritory(int idTerritory)
+        {
+            return dal.GetTerritoryById(idTerritory);
+        }
+
         public void AddTerritory(int idTerritoryType, int idOwner)
         {
             Territory territory = new Territory();
@@ -125,6 +204,88 @@ namespace BusinessLayer
             dal.SaveTerritory(territory);
         }
 
+        public void UpdateTerritory(int idTerritory, int idTerritoryType, int idOwner)
+        {
+            Territory territory = dal.GetTerritoryById(idTerritory);
+            territory.TerritoryType = dal.GetTerritoryTypeById(idTerritoryType);
+            territory.Owner = dal.GetCharacterById(idOwner);
+
+            dal.UpdateTerritory(territory);
+        }
+
+        public void DeleteTerritory(int idTerritory)
+        {
+            dal.DeleteTerritory(dal.GetTerritoryById(idTerritory));
+        }
+
+
+
+        public List<TerritoryType> ListTerritoryType()
+        {
+            List<TerritoryType> res = dal.GetAllTerritoryTypes();
+
+            return res;
+        }
+
+        public TerritoryType GetTerritoryType(int id)
+        {
+            return dal.GetTerritoryTypeById(id);
+        }
+
+        public void AddTerritoryType(String name)
+        {
+            TerritoryType territoryType = new TerritoryType();
+            territoryType.Name = name;
+
+            dal.SaveTerritoryType(territoryType);
+        }
+
+
+
+        public List<CharacterType> ListCharacterType()
+        {
+            List<CharacterType> res = dal.GetAllCharacterTypes();
+
+            return res;
+        }
+
+        public CharacterType GetCharacterType(int id)
+        {
+            return dal.GetCharacterTypeById(id);
+        }
+
+        public void AddCharacterType(String name)
+        {
+            CharacterType characterType = new CharacterType();
+            characterType.Name = name;
+
+            dal.SaveCharacterType(characterType);
+        }
+
+
+
+        public List<RelationType> ListRelationType()
+        {
+            List<RelationType> res = dal.GetAllRelationTypes();
+
+            return res;
+        }
+
+        public RelationType GetRelationType(int id)
+        {
+            return dal.GetRelationTypeById(id);
+        }
+
+        public void AddRelationType(String name)
+        {
+            RelationType relationType = new RelationType();
+            relationType.Name = name;
+
+            dal.SaveRelationType(relationType);
+        }
+
+
+        
         public House Combat(int idHouseChalleging, int idHouseChalleged, int idTerritory)
         {
             double scoreH1, scoreH2;
@@ -169,11 +330,7 @@ namespace BusinessLayer
             return moral;
         }
 
-        public War GetLastWar()
-        {
-            int idLastWar = dal.GetLastId("War");
-            return dal.GetWarById(idLastWar);
-        }
+
        
 
     }

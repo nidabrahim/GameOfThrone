@@ -38,9 +38,19 @@ namespace DataAccessLayer
         void DeleteTerritory(Territory territory);
 
 
+        List<TerritoryType> GetAllTerritoryTypes();
         TerritoryType GetTerritoryTypeById(int id);
+        void SaveTerritoryType(TerritoryType territoryType);
+
+
+        List<CharacterType> GetAllCharacterTypes();
         CharacterType GetCharacterTypeById(int id);
+        void SaveCharacterType(CharacterType characterType);
+
+
+        List<RelationType> GetAllRelationTypes();
         RelationType GetRelationTypeById(int id);
+        void SaveRelationType(RelationType relationType);
 
 
         List<War> GetAllWars();

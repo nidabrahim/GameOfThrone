@@ -1,0 +1,92 @@
+﻿@model List<WebGoT.Models.House.IndexViewModel>
+@{
+    ViewBag.Title = "Game of Thrones";
+    Layout = null;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    @RenderPage("/Views/Shared/headerGame.cshtml")
+</head>
+
+<body>
+
+    <nav id="menu" class="nav">
+        <table>
+            <tr>
+
+                @foreach (var house in Model)
+                {
+                    <td>
+                        <i><img src='~/images/logo/@(house.Name).jpg' onclick="uploadChar('@(house.Name)');" class="img-circle" /></i>
+                        <span>@house.Name</span>
+                    </td>
+                    
+                }
+           
+            </tr>
+
+        </table>
+
+    </nav>
+    <table id="table" style="width:90%">
+        @foreach (var house in Model)
+    {
+        <tr id="@(house.Name)" style="display: none;">
+
+            <td rowspan="2" id="cel" align="center"> <img src="~/images/houses/@(house.Name).png" /></td>
+
+            @foreach (var character in house.Housers)
+            {
+            <td id="@(character.firstName)" class="per" valign="top">
+                <div>@(character.firstName) @(character.lastName)</div>
+                <div><label>Bravoury : </label>@(character.bravoury)</div>
+                <div><label>Crazyness : </label> @(character.crazyness)</div>
+                <div><label>Pv : </label> @(character.pv)</div>
+
+            </td>
+            }
+
+        </tr>
+    }
+
+    </table>
+
+    <script>
+
+        function uploadChar(name) {
+
+            var infos = document.getElementById('table');
+            infos.rows[0].style.display = 'none';
+            infos.rows[1].style.display = 'none';
+            infos.rows[2].style.display = 'none';
+            infos.rows[3].style.display = 'none';
+            infos.rows[4].style.display = 'none';
+            infos.rows[5].style.display = 'none';
+
+
+            var infos = document.getElementById(name);
+            infos.style.display = 'block';
+            infos.style.color = "White";
+
+        }
+
+        function select(name) {
+            var pas;
+            for (pas = 1; pas < 5; pas++) {
+                var cel = document.getElementById(pas);
+                cel.style.borderColor = "";
+                cel.style.borderStyle = "";
+                cel.style.backgroundColor = "";
+            }
+            var cel = document.getElementById(name);
+            cel.style.borderColor = "#7DCB7B";
+            cel.style.borderStyle = "solid";
+            cel.style.backgroundColor = "#7DCB7B";
+
+
+        }
+    </script>
+</body>
+</html>

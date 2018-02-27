@@ -12,11 +12,12 @@ namespace WebGoT.Models.House
         public int NumberOfUnities { get; set; }
         public List<Character.IndexViewModel> Housers { get; set; }
 
-        public IndexViewModel(String name, int numberOfUnities)
+        public IndexViewModel(String name, int numberOfUnities, List<Character.IndexViewModel> Housers)
         {
             this.Name = name;
             this.NumberOfUnities = numberOfUnities;
             this.Housers = new List<Character.IndexViewModel>();
+            this.Housers = Housers;
         }
     }
 }

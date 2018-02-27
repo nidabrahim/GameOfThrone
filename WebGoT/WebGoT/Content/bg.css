@@ -1,0 +1,121 @@
+body{
+    background-image:url('/images/bg.jpg');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+ 	background-size: 100% 100%;
+}
+
+#progress{
+    width: 300px;
+    margin: auto;
+}
+progress{
+    display: inline-block;
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
+    width: 300px;
+    height: 20px;
+    padding: 3px 3px 2px 3px;
+    background: #333; 
+    background: -webkit-linear-gradient(#2d2d2d,#444);
+    background:    -moz-linear-gradient(#2d2d2d,#444);
+    background:      -o-linear-gradient(#2d2d2d,#444);
+    background:         linear-gradient(#2d2d2d,#444);
+    border: 1px solid rgba(0,0,0,.5);
+    border-radius: 15px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.2);   
+}
+progress::-webkit-progress-value{
+   
+  border-radius:10px;
+    background: #09c;
+    background: 
+      -moz-repeating-linear-gradient(
+        45deg, 
+        rgba(255,255,255,.2) 0,
+        rgba(255,255,255,.2) 10px, 
+        rgba(255,255,255,0) 10px,
+        rgba(255,255,255,0) 20px
+      ),
+      -moz-linear-gradient(
+        rgba(255,255,255,.1) 50%,
+        rgba(255,255,255,0) 60%
+      ),
+      #09c;
+    background: 
+      repeating-linear-gradient(
+        45deg, 
+        rgba(255,255,255,.2) 0,
+        rgba(255,255,255,.2) 10px, 
+        rgba(255,255,255,0) 10px,
+        rgba(255,255,255,0) 20px
+      ),
+      linear-gradient(
+        rgba(255,255,255,.1) 50%,
+        rgba(255,255,255,0) 60%
+      ),
+      #09c;
+    background-size: 300px 20px, auto, auto;
+    background-position: -300px 0, top, top;
+    background-position: top right, top, top;
+    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset, 
+                0 -1px 0 rgba(0,0,0,.8) inset,
+                0 0 2px black;
+}
+progress::-webkit-progress-bar{
+    background: transparent;
+}
+progress[value='100'] span{
+    width: 100%;
+}
+progress[value^='9']:not([value^='9.']):not([value='9']) span{
+    width: 95%;
+}
+progress[value^='8']:not([value^='8.']):not([value='8']) span{
+    width: 85%;
+}
+progress[value^='7']:not([value^='7.']):not([value='7']) span{
+    width: 75%;
+}
+progress[value^='6']:not([value^='6.']):not([value='6']) span{
+    width: 65%;
+}
+progress[value^='5']:not([value^='5.']):not([value='5']) span{
+    width: 55%;
+}
+progress[value^='4']:not([value^='4.']):not([value='4']) span{
+    width: 45%;
+}
+progress[value^='3']:not([value^='3.']):not([value='3']) span{
+    width: 35%;
+}
+progress[value^='2']:not([value^='2.']):not([value='2']) span{
+    width: 25%;
+}
+progress[value^='1']:not([value^='1.']):not([value='1']):not([value='100']) span{
+    width: 15%;
+}
+
+#corps
+{
+    max-width:          1000px;
+    position: absolute; /* postulat de départ */
+    top: 35%; left: 50.5%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%);
+}
+#menu
+{
+    max-width:          1000px;
+    position: absolute; /* postulat de départ */
+    top: 75%; left: 57%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%);
+}
+#load
+{
+    max-width:1000px;
+    color:rgb(200, 200, 200);
+    font-style: Buxton Sketch;
+    position: absolute; /* postulat de départ */
+    top: 80%; left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%);
+}

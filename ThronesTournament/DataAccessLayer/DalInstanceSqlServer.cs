@@ -22,7 +22,7 @@ namespace DataAccessLayer
         {
             List<House> houses = new List<House>();
 
-            using (SqlConnection sqlConnection = /*(Connexion.Instance).SqlConnection*/new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * FROM House", sqlConnection);
@@ -95,7 +95,7 @@ namespace DataAccessLayer
         {
             House house = new House();
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * FROM House WHERE IdHouse = " + id, sqlConnection);
@@ -162,7 +162,7 @@ namespace DataAccessLayer
         {
             String insertHouseRequest = "INSERT INTO House(name,numberOfUnities) VALUES (@Name,@NumberOfUnities)";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
 
@@ -179,7 +179,7 @@ namespace DataAccessLayer
         {
             String updateHouseRequest = "UPDATE House SET name = @Name , numberOfUnities = @NumberOfUnities Where IdHouse = @IdHouse";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
                 
@@ -197,8 +197,11 @@ namespace DataAccessLayer
         {
             String deleteHouseRequest = "DELETE FROM House WHERE IdHouse = @IdHouse";
             String deleteFightRequest = "DELETE FROM Fight WHERE houseChalleging_id = @IdHouse OR houseChalleged_id = @IdHouse OR winningHouse_id = @IdHouse";
+            String deleteCharacterRequest = "DELETE FROM Character WHERE IdCharacter = @IdCharacter";
+            String deleteRelationRequest = "DELETE FROM Relation WHERE IdCharacter1 = @IdCharacter OR IdCharacter2 = @IdCharacter";
+            String deleteTerritoryRequest = "DELETE FROM Territory WHERE owner_id = @IdCharacter";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
               
@@ -207,8 +210,20 @@ namespace DataAccessLayer
                 deleteFightCommand.ExecuteNonQuery();
 
                 foreach (Character character in house.Housers)
-                    DeleteCharacter(character);
+                {
+                    SqlCommand deleteTerritoryCommand = new SqlCommand(deleteTerritoryRequest, sqlConnection);
+                    deleteTerritoryCommand.Parameters.AddWithValue("@IdCharacter", character.idEntityObject);
+                    deleteTerritoryCommand.ExecuteNonQuery();
 
+                    SqlCommand deleteRelationCommand = new SqlCommand(deleteRelationRequest, sqlConnection);
+                    deleteRelationCommand.Parameters.AddWithValue("@IdCharacter", character.idEntityObject);
+                    deleteRelationCommand.ExecuteNonQuery();
+
+                    SqlCommand deleteCharacterCommand = new SqlCommand(deleteCharacterRequest, sqlConnection);
+                    deleteCharacterCommand.Parameters.AddWithValue("@IdCharacter", character.idEntityObject);
+                    deleteCharacterCommand.ExecuteNonQuery();
+                }
+                    
                 SqlCommand deleteHouseCommand = new SqlCommand(deleteHouseRequest, sqlConnection);
                 deleteHouseCommand.Parameters.AddWithValue("@IdHouse", house.idEntityObject);
                 deleteHouseCommand.ExecuteNonQuery();
@@ -223,7 +238,7 @@ namespace DataAccessLayer
         {
             List<Character> characters = new List<Character>();
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Character", sqlConnection);
@@ -322,7 +337,7 @@ namespace DataAccessLayer
             String insertRelationRequest = "INSERT INTO Relation VALUES (@IdCharacter1,@IdCharacter2,@IdRelationType)";
             Int32 idCharacter = 0;
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
                 
@@ -363,7 +378,7 @@ namespace DataAccessLayer
             String updateCharacterRequest = "UPDATE Character SET firstName = @FirstName, lastName = @LastName, bravoury = @Bravoury, crazyness = @Crazyness, pv = @Pv, characterType_id = @CharacterType_id  Where IdCharacter = @IdCharacter";
             String updateRelationRequest = "UPDATE Relation SET idCharacter2 = @IdCharacter2, idRelationType = @IdRelationType WHERE idCharacter1 = @IdCharacter";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
               
@@ -394,7 +409,7 @@ namespace DataAccessLayer
             String deleteRelationRequest = "DELETE FROM Relation WHERE IdCharacter1 = @IdCharacter OR IdCharacter2 = @IdCharacter";
             String deleteTerritoryRequest = "DELETE FROM Territory WHERE owner_id = @IdCharacter";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
 
@@ -481,7 +496,7 @@ namespace DataAccessLayer
             using (SqlConnection sqlConnection = new SqlConnection(connexionString))
             {
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand("select winningHouse_id from Fight where houseChalleging_id = " + id +"or houseChalleged_id = "+ id , sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("select * from Fight where houseChalleging_id = " + id +"or houseChalleged_id = "+ id , sqlConnection);
                 using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
                 {
                     while (sqlDataReader.Read())
@@ -568,7 +583,7 @@ namespace DataAccessLayer
         {
             List<Territory> Territories = new List<Territory>();
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Territory", sqlConnection);
@@ -620,7 +635,7 @@ namespace DataAccessLayer
         {
             String insertTerritoryRequest = "INSERT INTO Territory(territoryType_id,owner_id) VALUES (@TerritoryType_id,@Owner_id)";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
 
@@ -637,7 +652,7 @@ namespace DataAccessLayer
         {
             String updateTerritoryRequest = "UPDATE Territory SET territoryType_id = @TerritoryType_id ,owner_id = @Owner_id WHERE idTerritory = @IdTerritory ";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
 
@@ -710,7 +725,7 @@ namespace DataAccessLayer
         {
             String insertTerritoryTypeRequest = "INSERT INTO TerritoryType(name) VALUES (@Name)";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
 
@@ -728,7 +743,7 @@ namespace DataAccessLayer
         {
             List<CharacterType> characterTypes = new List<CharacterType>();
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * FROM CharacterType", sqlConnection);
@@ -776,7 +791,7 @@ namespace DataAccessLayer
         {
             String insertCharacterTypeTypeRequest = "INSERT INTO CharacterType(name) VALUES (@Name)";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
 
@@ -795,7 +810,7 @@ namespace DataAccessLayer
         {
             List<RelationType> relationTypes = new List<RelationType>();
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * FROM RelationType", sqlConnection);
@@ -843,7 +858,7 @@ namespace DataAccessLayer
         {
             String insertRelationTypeTypeTypeRequest = "INSERT INTO RelationType(name) VALUES (@Name)";
 
-            using (SqlConnection sqlConnection = new SqlConnection(connexionString))
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
             {
                 sqlConnection.Open();
 

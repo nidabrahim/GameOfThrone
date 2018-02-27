@@ -1,0 +1,186 @@
+
+body{
+    background-image:url('/images/bg1.jpg');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+ 	background-size: 100% 100%;
+}
+
+
+
+a, li {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/* Global CSS that are applied for all screen sizes */
+
+.nav table {
+	max-width: 1200px;
+	margin: 20px 0 0 50px;
+	padding: 0;
+	list-style: none;
+	font-size: 1.5em;
+	font-weight: 300;
+}
+.nav td {
+	max-width: 150px;
+	margin-left:20px;
+}
+
+.nav table span {
+	display: block;
+
+}
+
+.nav i {
+	display: block;
+	color: rgba(249, 249, 249, .9);
+	text-decoration: none;
+	-webkit-transition: color .5s, background .5s, height .5s;
+	-moz-transition: color .5s, background .5s, height .5s;
+	-o-transition: color .5s, background .5s, height .5s;
+	-ms-transition: color .5s, background .5s, height .5s;
+	transition: color .5s, background .5s, height .5s;
+}
+
+.nav i{
+	/* Make the font smoother for Chrome */
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	-o-transform: translate3d(0, 0, 0);
+	-ms-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+
+.no-touch .nav td:hover  {
+	color: rgba(249, 249, 249, .5);
+}
+
+.no-touch .nav td:hover td:hover {
+	color: rgba(249, 249, 249, 0.99);
+}
+
+/* Adding some background color to the different menu items */
+
+
+/* For screen bigger than 800px */
+@media (min-width: 50em) {
+
+	/* Transforms the list into a horizontal navigation */
+	.nav td {
+		float: left;
+		width: 16.66666666666667%;
+		text-align: center;
+		-webkit-transition: border .5s;
+		-moz-transition: border .5s;
+		-o-transition: border .5s;
+		-ms-transition: border .5s;
+		transition: border .5s;
+	}
+
+	.nav td {
+		display: block;
+		width: auto;
+	}
+
+	
+	/* Placing the icon */
+	
+	.icon {
+		padding-top: 1.4em;
+	}
+
+	.icon + span {
+		margin-top: 2.1em;
+		-webkit-transition: margin .5s;
+		-moz-transition: margin .5s;
+		-o-transition: margin .5s;
+		-ms-transition: margin .5s;
+		transition: margin .5s;
+	}
+
+	/* Positioning the icons and preparing for the animation*/
+	.nav i {
+		position: relative;
+		display: inline-block;
+		margin: 0 auto;
+		padding: 0.4em;
+		border-radius: 50%;
+		font-size: 1.8em;
+		box-shadow: 0 0 0 30px transparent;
+		background: rgba(255,255,255,0.1);
+		-webkit-transform: translate3d(0, 0, 0);
+		-moz-transform: translate3d(0, 0, 0);
+		-o-transform: translate3d(0, 0, 0);
+		-ms-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+		-webkit-transition: box-shadow .6s ease-in-out;
+		-moz-transition: box-shadow .6s ease-in-out;
+		-o-transition: box-shadow .6s ease-in-out;
+		-ms-transition: box-shadow .6s ease-in-out;
+		transition: box-shadow .6s ease-in-out;
+	}	
+	
+	/* Animate the box-shadow to create the effect */
+	.no-touch .nav td:hover i,
+	.no-touch .nav td:active i,
+	.no-touch .nav td:focus i {		
+		box-shadow: 0 0 0 0 rgba(255,255,255,0.2);
+		-webkit-transition: box-shadow .4s ease-in-out;
+		-moz-transition: box-shadow .4s ease-in-out;
+		-o-transition: box-shadow .4s ease-in-out;
+		-ms-transition: box-shadow .4s ease-in-out;
+		transition: box-shadow .4s ease-in-out;
+	}
+		
+}
+
+
+.container1 {
+  position: relative;
+}
+
+.image{
+	
+	position: absolute;
+    clip: rect(0, 140px, 190px, 0);
+}
+#ico{
+	color: #000;
+}
+#table{
+    border-width:3px; 
+    border-style:solid; 
+    border-color:white;
+}
+
+#cel{
+     margin-left:0px;
+     margin-right:20px;
+    
+     width:20%;
+     align-content:center;
+}
+.per{
+     width: 20%;
+     margin-right:10px;
+}
+.per:hover{
+    
+     border-width:4px; 
+     border-style:solid; 
+     border-color: rgb(151, 8, 0);
+}
+.background {
+  background-image:url('/images/houses/strong.png');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+ 	background-size: 100% 100%;
+}
+#img{
+    margin-left:35px;
+     border-style:solid; 
+     border-color: black;
+}

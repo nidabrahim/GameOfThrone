@@ -1,0 +1,9 @@
+﻿.container1 {
+  position: relative;
+}
+
+.image{
+	
+	position: absolute;
+    clip: rect(0, 140px, 190px, 0);
+}

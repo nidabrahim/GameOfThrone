@@ -15,9 +15,7 @@ namespace WebGoT.Controllers
         public ActionResult Index()
         {
             List<IndexViewModel> list = new List<IndexViewModel>();
-            /*list.Add(new IndexViewModel("nida", "youssef"));
-            list.Add(new IndexViewModel("nom", "prenom"));*/
-
+         
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:56063/");
 

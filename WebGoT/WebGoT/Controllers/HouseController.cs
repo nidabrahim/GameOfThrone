@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using WebGoT.Models.House;
 using Character = WebGoT.Models.Character;
+using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace WebGoT.Controllers
 {
@@ -13,15 +15,19 @@ namespace WebGoT.Controllers
         // GET: House
         public ActionResult Index()
         {
-            IndexViewModel house = new IndexViewModel("LANNISTER", 10);
-            house.Housers.Add(new Character.IndexViewModel("Nida","youssef"));
-            house.Housers.Add(new Character.IndexViewModel("Nidabrahim", "youssef"));
+            List<IndexViewModel> list = new List<IndexViewModel>();
 
-            List<IndexViewModel> listHouses = new List<IndexViewModel>();
-            listHouses.Add(house);
-            listHouses.Add(new IndexViewModel("BARATHEON", 13));
-            
-            return View(listHouses);
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:56063/");
+
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync("api/house/GetAllHouses").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                list = response.Content.ReadAsAsync<List<IndexViewModel>>().Result;
+            }
+
+            return View(list);
         }
 
         // GET: House/Details/5

@@ -292,24 +292,42 @@ namespace BusinessLayer
             House houseChalleging = dal.GetHouseById(idHouseChalleging);
             House houseChalleged = dal.GetHouseById(idHouseChalleged);
             Territory territory = dal.GetTerritoryById(idTerritory);
+            Random rand = new Random();
 
             //Unité
             scoreH1 = houseChalleging.NumberOfUnities;
             scoreH2 = houseChalleged.NumberOfUnities;
 
-            //House 1
+            //Territory
+            if (TerritoryOwner(houseChalleging, territory)) scoreH1 *= 10;
+            if (TerritoryOwner(houseChalleged, territory)) scoreH2 *= 10;
+
+            //Character
+            scoreH1 += CharacterScore(houseChalleging);
+            scoreH2 += CharacterScore(houseChalleged);
+
+            //House Moral
             scoreH1 *= GetHouseMoral(houseChalleging.idEntityObject);
-            //House 2
             scoreH2 *= GetHouseMoral(houseChalleged.idEntityObject);
 
-            if (houseChalleging.isHouseContain(new CharacterType(CharaterTypeEnum.WARRIOR))){
-                scoreH1 += 10;
-            }
+            //Character Warrior Witch
+            if (houseChalleging.isHouseContain(new CharacterType(CharaterTypeEnum.WARRIOR)) ||
+                houseChalleging.isHouseContain(new CharacterType(CharaterTypeEnum.WITCH)) ) scoreH1 *= rand.Next(2,11);
+            if (houseChalleged.isHouseContain(new CharacterType(CharaterTypeEnum.WARRIOR)) ||
+                houseChalleged.isHouseContain(new CharacterType(CharaterTypeEnum.WITCH))) scoreH2 *= rand.Next(2, 11);
 
-            if (houseChalleged.isHouseContain(new CharacterType(CharaterTypeEnum.WARRIOR))){
-                scoreH2 += 10;
-            }
+            //Character Loser
+            if (houseChalleging.isHouseContain(new CharacterType(CharaterTypeEnum.LOSER))) scoreH1 -= rand.Next(1,101);
+            if (houseChalleged.isHouseContain(new CharacterType(CharaterTypeEnum.LOSER))) scoreH2 -= rand.Next(1, 101);
 
+            //Character Tactician Leader
+            if (houseChalleging.isHouseContain(new CharacterType(CharaterTypeEnum.TACTICIAN)) ||
+                houseChalleging.isHouseContain(new CharacterType(CharaterTypeEnum.LEADER))) scoreH1 += rand.Next(2, 6);
+            if (houseChalleged.isHouseContain(new CharacterType(CharaterTypeEnum.TACTICIAN)) ||
+                houseChalleged.isHouseContain(new CharacterType(CharaterTypeEnum.LEADER))) scoreH2 += rand.Next(2, 6);
+
+            
+            //Winning House
             House winning = (scoreH1 > scoreH2) ? houseChalleging : houseChalleged;
 
             AddFight(houseChalleging, houseChalleged, winning, territory);
@@ -330,8 +348,26 @@ namespace BusinessLayer
             return moral;
         }
 
+        private Boolean TerritoryOwner(House house, Territory territory)
+        {
+            Boolean isOwner = false;
+            foreach(Character character in house.Housers) {
+                if (character.idEntityObject == territory.Owner.idEntityObject)
+                    isOwner = true;
+            }
 
-       
+            return isOwner;
+        }
 
+        private int CharacterScore(House house)
+        {
+            int score = 0;
+            foreach (Character character in house.Housers)
+                score += character.Bravoury + character.Crazyness + character.Pv;
+
+            return score;
+        }
+
+        
     }
 }

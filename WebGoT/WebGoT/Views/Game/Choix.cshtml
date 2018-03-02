@@ -18,7 +18,7 @@
 
                 @foreach (var house in Model)
                 {
-                    <td>
+                    <td style="width:130px!important">
                         <i><img src='~/images/logo/@(house.Name).jpg' onclick="uploadChar('@(house.Name)');" class="img-circle" /></i>
                         <span>@house.Name</span>
                     </td>
@@ -30,20 +30,49 @@
         </table>
 
     </nav>
+
     <table id="table" style="width:90%">
         @foreach (var house in Model)
     {
         <tr id="@(house.Name)" style="display: none;">
 
-            <td rowspan="2" id="cel" align="center"> <img src="~/images/houses/@(house.Name).png" /></td>
+            <td rowspan="2" id="cel" align="center">
+                <!--<img src="~/images/houses/@(house.Name).png" /> -->
+                <div style="margin-left:10px;margin-top:10px">
+                    <div >HOUSE @(house.Name)</div>
+
+                    <br />
+
+                    <div ><label>Characters : </label>@(house.Housers.Count)</div>
+                    <br />
+
+                    <div ><label>Unities : </label> @(house.NumberOfUnities)</div>
+                
+
+                </div>
+
+                <button type="button" class="btn btn-light" onclick="location.href='/Game/Partie?id=@(house.Id)'">Jouer</button>
+            </td>
 
             @foreach (var character in house.Housers)
             {
             <td id="@(character.firstName)" class="per" valign="top">
-                <div>@(character.firstName) @(character.lastName)</div>
-                <div><label>Bravoury : </label>@(character.bravoury)</div>
-                <div><label>Crazyness : </label> @(character.crazyness)</div>
-                <div><label>Pv : </label> @(character.pv)</div>
+
+                <div style="margin-left:10px;margin-top:10px">
+                    <div >@(character.firstName) @(character.lastName)</div>
+
+                    <br />
+
+                    <div><label>Bravoury : </label>@(character.bravoury)</div>
+                    <br />
+
+                    <div ><label>Crazyness : </label> @(character.crazyness)</div>
+                    <br />
+
+                    <div ><label>Pv : </label> @(character.pv)</div>
+
+
+                </div>
 
             </td>
             }
@@ -64,11 +93,17 @@
             infos.rows[3].style.display = 'none';
             infos.rows[4].style.display = 'none';
             infos.rows[5].style.display = 'none';
+            infos.rows[6].style.display = 'none';
+            infos.rows[7].style.display = 'none';
 
 
             var infos = document.getElementById(name);
             infos.style.display = 'block';
             infos.style.color = "White";
+
+        }
+
+        function play(house) {
 
         }
 

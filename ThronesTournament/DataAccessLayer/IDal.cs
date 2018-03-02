@@ -55,8 +55,10 @@ namespace DataAccessLayer
 
         List<War> GetAllWars();
         War GetWarById(int id);
+        void SaveWar();
 
         int GetLastId(String table);
+        
 
     }
 }

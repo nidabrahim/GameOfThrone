@@ -8,12 +8,14 @@ namespace WebGoT.Models.House
 {
     public class IndexViewModel
     {
+        public int Id { get; set; }
         public String Name { get; set; }
         public int NumberOfUnities { get; set; }
         public List<Character.IndexViewModel> Housers { get; set; }
 
-        public IndexViewModel(String name, int numberOfUnities, List<Character.IndexViewModel> Housers)
+        public IndexViewModel(int id, String name, int numberOfUnities, List<Character.IndexViewModel> Housers)
         {
+            this.Id = id;
             this.Name = name;
             this.NumberOfUnities = numberOfUnities;
             this.Housers = new List<Character.IndexViewModel>();

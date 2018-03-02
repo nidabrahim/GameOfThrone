@@ -1,0 +1,121 @@
+﻿body{
+    background-image:url('/images/bg2.jpg');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+ 	background-size: 100% 100%;
+}
+#map
+{
+    max-width:1000px;
+    color:rgb(200, 200, 200);
+    font-style: Buxton Sketch;
+    position: absolute; /* postulat de départ */
+    top: 50%; left: 100%; /* à 50%/50% du parent référent */
+    transform: translate(-100%, -50%);
+}
+
+#houseInfos {
+    max-width: 1000px;
+    color: rgb(255, 255, 255);
+    font-style: Buxton Sketch;
+    position: absolute; /* postulat de départ */
+    top: 30%;
+    left: 10%; /* à 50%/50% du parent référent */
+    transform: translate(-10%, -50%);
+} 
+
+#infos {
+    max-width: 1000px;
+    color: rgb(255, 255, 255);
+    font-style: Buxton Sketch;
+    position: absolute; /* postulat de départ */
+    top: 65%;
+    left: 10%; /* à 50%/50% du parent référent */
+    transform: translate(-10%, -50%);
+} 
+#logo1 {
+  border-radius: 50%;
+  position: absolute; 
+  top: 42px; right:174px;
+
+}
+#logo2 {
+  border-radius: 50%;
+  position: absolute; 
+  top: 40px; right:444px;
+}
+
+#logo3 {
+  border-radius: 50%;
+  position: absolute; 
+  top: 573px; right:134px;
+
+}
+
+#logo4 {
+  border-radius: 50%;
+  position: absolute; 
+  top: 528px; right:452px;
+}
+
+#logo5 {
+  border-radius: 50%;
+  position: absolute; 
+  top: 373px; right:139px;
+
+}
+
+#logo6 {
+  border-radius: 50%;
+  position: absolute; 
+  top: 380px; right:404px;
+}
+
+#logo7 {
+  border-radius: 50%;
+  position: absolute; 
+  top: 306px; right:282px;
+
+}
+
+#logo8 {
+  border-radius: 50%;
+  position: absolute; 
+  top: 403px; right:248px;
+}
+
+#button{
+    position: absolute; /* postulat de départ */
+    top: 95%; left: 20%; /* à 50%/50% du parent référent */
+    transform: translate(-20%, -95%);
+}
+
+#result{
+    position: absolute; /* postulat de départ */
+    top: 5%; left: 30%; /* à 50%/50% du parent référent */
+    transform: translate(-30%, -5%);
+}
+
+#divInfos {
+    width: auto;
+    height : 200px;
+    color: white;
+    margin-top: 11%;
+    margin-left: 35%;
+    margin-right: 30%;
+}
+
+#tableFights {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+/*
+#resultFail {
+    
+}
+*/
+#retour {
+    margin-left: 20%;
+    margin-right: 30%;
+}

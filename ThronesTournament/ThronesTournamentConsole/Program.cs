@@ -8,135 +8,241 @@ using BusinessLayer;
 
 namespace ThronesTournamentConsole
 {
-     class Program
+    class Program
     {
-        
-         public static void Main(string[] args)
-         {
-            Program prog = new Program();
-            ThronesTournamentManager mng = new ThronesTournamentManager(); 
-            int choix;
-            char revenir = 'o';
-            
-            do {
+        static void Main(string[] args)
+        {
+            //Instanciate the Business Manager
+            ThronesTournamentManager bm = new ThronesTournamentManager();
+
+            //choice : the variable containing the user's choice
+            int choice;
+
+            //Menu (5 to quit)
+            do
+            {
+
+                //Print the menu
                 Console.Clear();
-                prog.Menu();
-                Console.WriteLine("\n\n >> Choix : ");
-                choix = Int32.Parse(Console.ReadLine());
+                Console.Write(mainMenu());
 
-                switch (choix)
-                {
-                    case 1:
-                        Console.Clear();
-                        Console.WriteLine("HOUSES\n");
-                        List<House> houses = mng.ListHouses();
-                        foreach(House house in houses)
-                        {
-                            Console.WriteLine(house);
-                        }
+                //Let the user make their choice
+                choice = Convert.ToInt32(Console.ReadLine());
+                string result = mainMenuChoice(bm, choice);
 
-                        break;
+                //Menu output
+                Console.Clear();
+                Console.WriteLine(result);
+                Console.Write("\n*****Press Enter*****");
+                Console.ReadLine();
+            } while (choice != 8);
+        }
 
-                    case 2:
-                        Console.Clear();
-                        Console.WriteLine("CHARACTER\n");
-                        List<Character> characters = mng.ListCharacters();
-                        foreach (Character character in characters)
-                        {
-
-                            Console.WriteLine(character);
-                        }
-
-                        break;
-
-                    case 3:
-                        Console.Clear();
-                        Console.WriteLine("TERRITORIES\n");
-                        List<Territory> territories = mng.ListTerritories();
-                        foreach (Territory territory in territories)
-                        {
-
-                            Console.WriteLine(territory);
-                        }
-
-                        break;
-
-                    case 4:
-                        Console.Clear();
-                        Console.WriteLine("FIGHTS\n");
-                        List<Fight> fights = mng.ListFights();
-                        foreach (Fight fight in fights)
-                        {
-
-                            Console.WriteLine(fight);
-                        }
-
-                        break;
-
-                    case 5:
-
-                        House winningHouse = mng.Combat(1, 2, 1);
-                        Console.WriteLine(winningHouse);
-
-                        break;
-
-                    case 6:
-
-                        break;
-
-                    default :
-                        Console.WriteLine("Choix invalid");
-                        break;
-
-                }
-
-                Console.WriteLine("Revenir au Menu principal (o/n) : ");
-                revenir = Console.ReadKey().KeyChar;
-
-            } while (choix != 6 &&  revenir == 'o');
-            /*
-            House house = new House("H1");
-            House house2 = new House("H2");
-
-            Character c = new Character();
-            Character c1 = new Character("fff","yyh");
-            Character c2 = new Character("fff", "yyh", CharaterTypeEnum.LEADER, 0,0);
-
-            c.AddRelative(c2, RelationshipEnum.FRIENDSHIP);
-            c.AddRelative(c1, RelationshipEnum.HATRED);
-            c1.AddRelative(c2, RelationshipEnum.RIVALRY);
-            c2.AddRelative(c, RelationshipEnum.FRIENDSHIP);
-
-            Console.WriteLine(c);
-            Console.WriteLine(c1);
-            Console.WriteLine(c2);
-
-            house.AddHousers(ref c);
-            house.AddHousers(ref c1);
-
-           
-            house2.AddHousers(ref c2);
-
-            Console.WriteLine(house);
-            Console.WriteLine(house2);
-
-            Territory territory = new Territory(TerritoryType.MOUNTAIN, c);
-        
-            Fight fight = new Fight(house,house2,territory);
-            fight.Winner();*/
-            
-         }
-
-        private void Menu()
+        public static string mainMenu()
         {
 
-            Console.WriteLine("Menu Principal\n");
-            Console.WriteLine("\t *1* Lister les Houses\n");
-            Console.WriteLine("\t *2* Lister les Characters\n");
-            Console.WriteLine("\t *3* Lister les Territories\n");
-            Console.WriteLine("\t *4* Lister les Fights\n");
-            Console.WriteLine("\t *5* Combat\n");
-            Console.WriteLine("\t *6* Quitter\n");
+            return " ****** Menu ******\n "
+            + " 1 – List all Houses\n "
+            + " 2 – List all Characters\n "
+            + " 3 – List all Territories\n "
+            + " 4 – List all Fights\n "
+            + " 5 – Make 2 Houses fight each other\n "
+            + " 6 – Add a House\n "
+            + " 7 – Add a Character\n "
+            + " 8 – Quit\n "
+            + " Choice ? : ";
+        }
+
+        public static string mainMenuChoice(ThronesTournamentManager business, int choice)
+        {
+            string result = "";
+
+            switch (choice)
+            {
+                case 1:
+                    foreach (House s in business.ListHouses())
+                    {
+                        Console.Write("\n*****HOUSES*****\n");
+                        result += s + "\n";
+                    }
+                    break;
+                case 2:
+                    foreach (Character s in business.ListCharacters())
+                    {
+                        Console.Write("\n*****CHARACTERS*****\n");
+                        result += s + "\n";
+                    }
+                    break;
+                case 3:
+                    foreach (Territory s in business.ListTerritories())
+                    {
+                        Console.Write("\n*****TERRITORIES*****\n");
+                        result += s + "\n";
+                    }
+                    break;
+                case 4:
+                    foreach (Fight s in business.ListFights())
+                    {
+                        Console.Write("\n*****FIGHTS*****\n");
+                        result += s + "\n";
+                    }
+                    break;
+                case 5:
+                    String winner = combatMenu(business);
+                    result += "The winner is : " + winner + "\n";
+                    break;
+                case 6:
+                    addHouseMenu(business);
+                    Console.WriteLine("House Created\n");
+                    break;
+                case 7:
+                    addCharacterMenu(business);
+                    Console.WriteLine("Character Created\n");
+                    break;
+                case 8:
+                    result += "Goodbye";
+                    break;
+                default:
+                    result += "Bad choice, try again ";
+                    break;
+            }
+            return result;
+        }
+
+        public static String combatMenu(ThronesTournamentManager business)
+        {
+            //Initialize local variables
+            int h1, h2, t, i = 0;
+            String list = "";
+
+            //Print the first house menu
+            Console.Clear();
+            Console.WriteLine("*****COMBAT*****\n");
+            Console.WriteLine("Select the first house\n");
+            foreach (String s in business.ListHousesNames())
+            {
+                list += i + ":" + s + "\n";
+                i++;
+            }
+            Console.WriteLine(list);
+
+            //The user chooses the first house
+            Console.Write("\n*****Choose the first house:");
+            h1 = Convert.ToInt32(Console.ReadLine());
+
+            //Print the second house menu
+            i = 0; list = "";
+            Console.Clear();
+            Console.WriteLine("Select the second house\n");
+            foreach (String s in business.ListHousesNames())
+            {
+                if (i != h1)
+                {
+                    list += i + ":" + s + "\n";
+                }
+                i++;
+            }
+            Console.WriteLine(list);
+
+            //The user chooses the second house
+            Console.Write("\n*****Choose the second house:");
+            h2 = Convert.ToInt32(Console.ReadLine());
+
+            //Print the territory menu
+            i = 0; list = "";
+            Console.Clear();
+            Console.WriteLine("Select the territory\n");
+            foreach (Territory s in business.ListTerritories())
+            {
+                list += i + ":" + s + "\n";
+                i++;
+            }
+            Console.WriteLine(list);
+
+            //The user chooses the territory
+            Console.Write("\n*****Choose the territory:");
+            t = Convert.ToInt32(Console.ReadLine());
+
+            //Make the houses fight and display the winner
+            House winningHouse = business.Combat(h1, h2, t);
+            return winningHouse.Name;
+        }
+
+        public static void addHouseMenu(ThronesTournamentManager business)
+        {
+            //Initialize local variables
+            String name;
+            int units;
+
+            //House's name
+            Console.Clear();
+            Console.WriteLine("*****ADD A HOUSE*****\n");
+            Console.WriteLine("Enter the house's name:");
+            name = Console.ReadLine();
+            Console.WriteLine("\n");
+
+            //Number of units
+            Console.WriteLine("Enter the number of units:");
+            units = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\n");
+
+            //Add the house
+            business.AddHouse(name, units);
+        }
+
+        public static void addCharacterMenu(ThronesTournamentManager business)
+        {
+            //Initialize local variables
+            String firstname, lastname, list = "";
+            int craziness, bravery, pv, type, i = 0, h;
+
+            //Firstname
+            Console.Clear();
+            Console.WriteLine("Enter the house's name:");
+            firstname = Console.ReadLine();
+            Console.WriteLine("\n");
+
+            //Lastname
+            Console.WriteLine("Enter the house's name:");
+            lastname = Console.ReadLine();
+            Console.WriteLine("\n");
+
+            //Bravery
+            Console.WriteLine("Enter the bravery level:");
+            bravery = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\n");
+
+            //Craziness
+            Console.WriteLine("Enter the craziness level:");
+            craziness = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\n");
+
+            //PV
+            Console.WriteLine("Enter the number of health points:");
+            pv = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\n");
+
+            //Type
+            Console.WriteLine("Select the character's type\n0) WARRIOR\n1) WITCH \n2) TACTICIAN\n 3) LEADER\n4) LOSER\nYour choice:");
+            type = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(list);
+
+            //House
+            Console.WriteLine("Select house\n");
+            foreach (String s in business.ListHousesNames())
+            {
+                list += i + ":" + s + "\n";
+                i++;
+            }
+            Console.WriteLine(list);
+
+            //The user chooses the first house
+            Console.Write("\n*****Choose the first house:");
+            h = Convert.ToInt32(Console.ReadLine());
+
+            //Create the character
+            business.AddCharacter(firstname, lastname, bravery, craziness, pv, type,h);
+
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using EntitiesLayer;
+
 
 namespace WebApiGoT.Models
 {
@@ -11,7 +11,7 @@ namespace WebApiGoT.Models
         public List<FightDTO> Fights;
 
 
-        public WarDTO(War war) {
+       /* public WarDTO(War war) {
 
             this.Fights = new List<FightDTO>();
 
@@ -19,6 +19,6 @@ namespace WebApiGoT.Models
             {
                 this.Fights.Add(new FightDTO(fight));
             }
-        }
+        }*/
     }
 }

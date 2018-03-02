@@ -1,0 +1,144 @@
+﻿@model WebGoT.Models.House.PartieViewModel
+@{
+    ViewBag.Title = "Partie";
+    Layout = null;
+    String[] logos = { "Arryn", "fire", "honor", "roar", "Strong", "winter", "unbroken", "Tully" };
+}
+
+<html>
+<head>
+    <title>Game Of Thrones</title>
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/game.css" />
+</head>
+<body>
+    <h1 style="display:none;" id="result"></h1>
+
+    <table id="houseInfos">
+        <tr>
+            <td><h2>House Challeging</h2> </td>
+            <td><h2>: @(Model.House.Name)</h2> </td>
+        </tr>
+        <tr>
+            <td><h2>Number of unity </h2> </td>
+            <td><h2>:  @(Model.House.NumberOfUnities)</h2> </td>
+        </tr>
+    </table>
+
+
+
+    <table id="infos">
+        <tr>
+            <td><h2>House Challeged</h2> </td>
+            <td><h2 id="houseName">:</h2> </td>
+        </tr>
+        <tr>
+            <td><h2>Numbre of characters </h2> </td>
+            <td><h2 id="charNbr">:</h2> </td>
+        </tr>
+        <tr>
+            <td><h2>Number of unity </h2> </td>
+            <td><h2 id="unity">:</h2> </td>
+        </tr>
+    </table>
+
+
+
+
+    <div id="button">
+        <img src="~/images/fight.jpg" onclick="fight('@Model.House.Id');" />
+    </div>
+
+    <div id="map">
+        <img src="~/images/map.jpg" />
+    </div>
+
+    <div>
+
+        @for (var i = 0; i < 8; i++)
+        {
+            var house = Model.RandHouses.ElementAt(i);
+            <img id="logo@(i + 1)" src="~/images/map_logos/@(house.Name).jpg" onclick="information('@(house.Id)','@(house.Name)','@(house.Housers.Count)','@(house.NumberOfUnities)');" alt="Avatar" />
+
+        }
+    </div>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var url = "http://localhost:56063/api/war/GetWar";
+
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Content-type", "application/json");
+                },
+                success: function (data) {
+                    
+                }
+
+            });
+
+        };
+
+    </script>
+
+    <script>
+
+        var idHouseChalleged = null;
+        var i = 0;
+        function information(idH, nameH, nameC, nbr) {
+            idHouseChalleged = idH;
+            document.getElementById('houseName').innerHTML = ": " + nameH;
+            document.getElementById('charNbr').innerHTML = ": " + nameC;
+            document.getElementById('unity').innerHTML = ": " + nbr;
+        }
+
+        function fight(idHouseChalleging) {
+
+            document.getElementById('result').style.display = 'none';
+
+            if (idHouseChalleged == null) alert('Veuillez selectionner une House sur le Map');
+            else {
+                i = i + 1;
+                var result = document.getElementById('result')
+                var url = "http://localhost:56063/api/fight/GetWinningHouse/" + idHouseChalleging + "/" + idHouseChalleged;
+
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    beforeSend: function (request) {
+                        request.setRequestHeader("Content-type", "application/json");
+                    },
+                    success: function (data) {
+
+                        if (data == idHouseChalleging) {
+                            result.style.color = 'green';
+                            result.innerHTML = " You won last battle";
+
+                        }
+                        else {
+                            result.style.color = 'red';
+                            result.innerHTML = " You lost last battle";
+
+                            location.href = '/Game/Fail';
+                        }
+                        result.style.display = 'block';
+
+                        if (i == 7) {
+                            location.href = '/Game/Win';
+                        }
+
+                    }
+
+                });
+
+            }
+        }
+    </script>
+</body>
+</html>

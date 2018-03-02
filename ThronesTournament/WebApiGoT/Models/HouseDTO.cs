@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using EntitiesLayer;
+
 
 namespace WebApiGoT.Models
 {
     public class HouseDTO
     {
+        public int Id { get; set; }
         public String Name { get; set; }
         public int NumberOfUnities { get; set; }
         public List<CharacterDTO> Housers;
 
 
-        public HouseDTO(House house) {
+        /*public HouseDTO(House house) {
 
             this.Name = house.Name;
             this.NumberOfUnities = house.NumberOfUnities;
@@ -24,6 +25,6 @@ namespace WebApiGoT.Models
             {
                 this.Housers.Add(new CharacterDTO(character));
             }
-        }
+        }*/
     }
 }

@@ -154,6 +154,10 @@
     </Compile>
     <Compile Include="Models\Character\IndexViewModel.cs" />
     <Compile Include="Models\House\IndexViewModel.cs" />
+    <Compile Include="Models\House\PartieViewModel.cs" />
+    <Compile Include="Models\War\FightViewModel.cs" />
+    <Compile Include="Models\War\TerritoryViewModel.cs" />
+    <Compile Include="Models\War\WarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -162,15 +166,19 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css.css" />
     <Content Include="Content\css\component.css" />
+    <Content Include="Content\game.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\bg1.jpg" />
+    <Content Include="images\bg2.jpg" />
     <Content Include="images\button\button.png" />
     <Content Include="images\button\credit.png" />
     <Content Include="images\button\option.png" />
+    <Content Include="images\fight.jpg" />
+    <Content Include="images\game_of_thrones_icons_png_seriados_series_by_tallyson_d5vu9np.png" />
     <Content Include="images\houses\Baratheon.png" />
     <Content Include="images\houses\Martell.png" />
     <Content Include="images\houses\Targaryen.png" />
@@ -179,14 +187,23 @@
     <Content Include="images\houses\Sans titre.png" />
     <Content Include="images\houses\Tyrell.png" />
     <Content Include="images\houses\unbroken.png" />
-    <Content Include="images\logo\21.jpg" />
+    <Content Include="images\logo\Tully.jpg" />
     <Content Include="images\logo\Targaryen.jpg" />
     <Content Include="images\logo\Baratheon.JPG" />
-    <Content Include="images\logo\honor.jpg" />
+    <Content Include="images\logo\Arryn.jpg" />
     <Content Include="images\logo\Lanister.jpg" />
     <Content Include="images\logo\Tyrell.jpg" />
     <Content Include="images\logo\Martell.JPG" />
     <Content Include="images\logo\Stark.JPG" />
+    <Content Include="images\map.jpg" />
+    <Content Include="images\map_logos\Tully.jpg" />
+    <Content Include="images\map_logos\Targaryen.jpg" />
+    <Content Include="images\map_logos\Baratheon.jpg" />
+    <Content Include="images\map_logos\Arryn.jpg" />
+    <Content Include="images\map_logos\Lanister.jpg" />
+    <Content Include="images\map_logos\Tyrell.jpg" />
+    <Content Include="images\map_logos\Martell.jpg" />
+    <Content Include="images\map_logos\Stark.JPG" />
     <Content Include="images\personne\winter1.jpg" />
     <Content Include="images\personne\winter2.jpg" />
     <Content Include="Scripts\anim.js" />
@@ -232,6 +249,9 @@
     <Content Include="Views\Shared\headerGame.cshtml" />
     <Content Include="Views\Shared\template.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Game\Partie.cshtml" />
+    <Content Include="Views\Game\Fail.cshtml" />
+    <Content Include="Views\Game\Win.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

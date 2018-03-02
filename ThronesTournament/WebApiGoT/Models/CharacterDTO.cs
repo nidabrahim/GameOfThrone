@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using EntitiesLayer;
+
 
 
 namespace WebApiGoT.Models
@@ -16,6 +16,7 @@ namespace WebApiGoT.Models
         public int Crazyness { get; set; }
         public int Pv { get; set; }
 
+        /*
         public CharacterDTO(Character character) {
 
             this.FirstName = character.FirstName;
@@ -23,7 +24,8 @@ namespace WebApiGoT.Models
             this.Bravoury = character.Bravoury;
             this.Crazyness = character.Crazyness;
             this.Pv = character.Pv;
+            
 
-        }
+        }*/
     }
 }

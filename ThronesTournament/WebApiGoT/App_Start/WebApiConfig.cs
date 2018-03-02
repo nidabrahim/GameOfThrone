@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
+
 namespace WebApiGoT
 {
     public static class WebApiConfig
@@ -10,6 +11,9 @@ namespace WebApiGoT
         public static void Register(HttpConfiguration config)
         {
             // Configuration et services API Web
+            //config.EnableCors();
+
+            
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();

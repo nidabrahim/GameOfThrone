@@ -34,3 +34,7 @@ C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\Ap
 C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\ApiUnitTest\obj\Debug\WebApiGoT.Tests.csproj.CoreCompileInputs.cache
 C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\ApiUnitTest\obj\Debug\ApiUnitTest.dll
 C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\ApiUnitTest\obj\Debug\ApiUnitTest.pdb
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\ApiUnitTest\bin\Debug\ApiUnitTest.dll.config
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\ApiUnitTest\bin\Debug\System.Web.Http.Cors.dll
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\ApiUnitTest\bin\Debug\System.Web.Cors.dll
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\ApiUnitTest\bin\Debug\System.Web.Http.Cors.xml

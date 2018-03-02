@@ -61,5 +61,10 @@ namespace EntitiesLayer
         {
             Console.WriteLine("The winner is : \n" + WinningHouse);
         }
+
+        override public String ToString()
+        {
+            return HouseChalleging.Name + " vs. " + HouseChalleged.Name + " on " + Territory.TerritoryType.Name;
+        }
     }
 }

@@ -27,6 +27,29 @@ namespace BusinessLayer
             return res;
         }
 
+
+        public List<House> ListRandomHouses()
+        {
+            List<House> res = dal.GetAllHouses();
+            List<House> randomHouses = new List<House>();
+           
+            res.Shuffle();
+            for (int i=0; i<8; i++)
+            {
+                randomHouses.Add(res.ElementAt(i));
+            }
+            
+            return res;
+        }
+
+        public List<String> ListHousesNames()
+        {
+            List<String> housesName = new List<string>();
+            ListHouses().ForEach(h => housesName.Add(h.Name));
+
+            return housesName;
+        }
+
         public void AddHouse(string name, int numberOfUnities)
         {
 
@@ -100,6 +123,12 @@ namespace BusinessLayer
             int idLastWar = dal.GetLastId("War");
             return dal.GetWarById(idLastWar);
         }
+
+        public int AddWar()
+        {
+            dal.SaveWar();
+            return 1;
+        }
         
 
 
@@ -148,7 +177,7 @@ namespace BusinessLayer
             return dal.GetCharacterById(idCharacter);
         }
 
-        public void AddCharacter(string FirstName, string LastName, int Bravoury, int Crazyness, int Pv, int IdType)
+        public void AddCharacter(string FirstName, string LastName, int Bravoury, int Crazyness, int Pv, int IdType, int IdHouse)
         {
 
             Character character = new Character();
@@ -158,11 +187,12 @@ namespace BusinessLayer
             character.Crazyness = Crazyness;
             character.Pv = Pv;
             character.Type = dal.GetCharacterTypeById(IdType);
+            character.House = dal.GetHouseById(IdHouse);
 
             dal.SaveCharacter(character);
         }
 
-        public void UpdateCharacter(int idCharacter, string FirstName, string LastName, int Bravoury, int Crazyness, int Pv, int IdType)
+        public void UpdateCharacter(int idCharacter, string FirstName, string LastName, int Bravoury, int Crazyness, int Pv, int IdType, int IdHouse)
         {
             Character character = dal.GetCharacterById(idCharacter);
             character.FirstName = FirstName;
@@ -171,6 +201,7 @@ namespace BusinessLayer
             character.Crazyness = Crazyness;
             character.Pv = Pv;
             character.Type = dal.GetCharacterTypeById(IdType);
+            character.House = dal.GetHouseById(IdHouse);
 
             dal.UpdateCharacter(character);
         }
@@ -339,11 +370,13 @@ namespace BusinessLayer
         {
             Double moral = 1;
             List<Fight> fights = dal.GetFightsByIdHouse(idHouse);
-            Fight lastFight = fights.Last<Fight>();
-            if (lastFight.WinningHouse.idEntityObject == idHouse)
-                moral = 1.2;
-            else moral = 0.8;
-           
+            if (fights.Count != 0)
+            {
+                Fight lastFight = fights.Last<Fight>();
+                if (lastFight.WinningHouse.idEntityObject == idHouse)
+                    moral = 1.2;
+                else moral = 0.8;
+            }
 
             return moral;
         }
@@ -369,5 +402,21 @@ namespace BusinessLayer
         }
 
         
+    }
+    static class MyExtensions
+    {
+        private static Random rng = new Random();
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
     }
 }

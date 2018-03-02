@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using EntitiesLayer;
 
 namespace WebApiGoT.Models
 {
@@ -12,15 +11,18 @@ namespace WebApiGoT.Models
         public string HouseChalleging { get; set; }
         public string HouseChalleged { get; set; }
         public string WinningHouse { get; set; }
-        public string Territory { get; set; }
+        public TerritoryDTO Territory { get; set; }
 
-        public FightDTO(Fight fight) {
+      /*  public FightDTO(Fight fight) {
 
             this.HouseChalleging = fight.HouseChalleging.Name;
             this.HouseChalleged = fight.HouseChalleged.Name;
             this.WinningHouse = fight.WinningHouse.Name;
-            this.Territory = fight.Territory.TerritoryType.ToString();
-
-        }
+            this.Territory = new TerritoryDTO() {
+                Owner = fight.Territory.Owner.FirstName + " " + fight.Territory.Owner.LastName,
+                TerritoryType = fight.Territory.TerritoryType.ToString()
+        }; 
+            
+        }*/
     }
 }

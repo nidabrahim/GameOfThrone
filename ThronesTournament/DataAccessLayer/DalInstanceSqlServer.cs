@@ -990,6 +990,21 @@ namespace DataAccessLayer
             return index;
         }
 
+        public void SaveWar()
+        {
+            String insertWarRequest = "INSERT INTO War(name) VALUES ('war')";
+
+            using (SqlConnection sqlConnection = (Connexion.Instance).SqlConnection)
+            {
+                sqlConnection.Open();
+
+                SqlCommand insertCommand = new SqlCommand(insertWarRequest, sqlConnection);
+                insertCommand.ExecuteNonQuery();
+
+                sqlConnection.Close();
+            }
+        }
+
 
 
     }

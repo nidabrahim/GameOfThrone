@@ -50,3 +50,6 @@ C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\We
 C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\WebApiGoT\obj\Debug\WebApiGoT.csproj.CoreCompileInputs.cache
 C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\WebApiGoT\obj\Debug\WebApiGoT.dll
 C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\WebApiGoT\obj\Debug\WebApiGoT.pdb
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\WebApiGoT\bin\System.Web.Cors.dll
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\WebApiGoT\bin\System.Web.Http.Cors.dll
+C:\Users\youssefNIDA\Documents\ISIMA\S2\web Services\Projet\ThronesTournament\WebApiGoT\bin\System.Web.Http.Cors.xml

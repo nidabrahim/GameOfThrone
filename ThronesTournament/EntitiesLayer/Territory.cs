@@ -44,5 +44,10 @@ namespace EntitiesLayer
             this.TerritoryType = TerritoryType;
             this.Owner = Owner;
         }
+
+        override public String ToString()
+        {
+            return TerritoryType.Name;
+        }
     }
 }
